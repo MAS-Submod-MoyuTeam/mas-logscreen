@@ -1,9 +1,11 @@
-default persistent._fom_log_screen_display_lines = 6
-default persistent._fom_log_screen_logger_levels = {}
-default persistent._fom_log_screen_panel_opacity = 0x7f
-default persistent._fom_log_screen_color_scheme = 1
-default persistent._fom_log_screen_show_on_startup = False
-default persistent._fom_log_screen_font_size = 2
+default persistent._fom_log_screen_config = {
+    "display_lines": 6,
+    "logger_levels": {},
+    "panel_opacity": 0x7f,
+    "color_scheme": 1,
+    "show_on_startup": False,
+    "font_size": 2
+}
 
 init -1000 python in _fom_log_screen_config:
     from store import persistent
@@ -20,18 +22,18 @@ init -1000 python in _fom_log_screen_config:
 
         @property
         def display_lines(self):
-            return persistent._fom_log_screen_display_lines
+            return persistent._fom_log_screen_config["display_lines"]
 
         @display_lines.setter
         def display_lines(self, lines):
-            persistent._fom_log_screen_display_lines = lines
+            persistent._fom_log_screen_config["display_lines"] = lines
 
         @property
         def logger_levels(self):
-            return persistent._fom_log_screen_logger_levels
+            return persistent._fom_log_screen_config["logger_levels"]
 
         def get_logger_level(self, logger_name):
-            levelno = persistent._fom_log_screen_logger_levels.get(logger_name, logging.INFO)
+            levelno = persistent._fom_log_screen_config["logger_levels"].get(logger_name, logging.INFO)
             normalized = (levelno // 10) * 10
             return normalized
 
@@ -54,8 +56,8 @@ init -1000 python in _fom_log_screen_config:
                     logging.CRITICAL: "OFF"}
 
         def add_default_logger_level(self, logger_name):
-            if logger_name not in persistent._fom_log_screen_logger_levels:
-                persistent._fom_log_screen_logger_levels[logger_name] = logging.INFO
+            if logger_name not in persistent._fom_log_screen_config["logger_levels"]:
+                persistent._fom_log_screen_config["logger_levels"][logger_name] = logging.INFO
 
         @property
         def panel_background_color(self):
@@ -64,13 +66,13 @@ init -1000 python in _fom_log_screen_config:
 
         @property
         def panel_opacity(self):
-            return persistent._fom_log_screen_panel_opacity
+            return persistent._fom_log_screen_config["panel_opacity"]
 
         @panel_opacity.setter
         def panel_opacity(self, opacity):
             opacity = max(0, opacity)
             opacity = min(255, opacity)
-            persistent._fom_log_screen_panel_opacity = opacity
+            persistent._fom_log_screen_config["panel_opacity"] = opacity
 
         @property
         def color_scheme_names(self):
@@ -86,19 +88,19 @@ init -1000 python in _fom_log_screen_config:
 
         @property
         def color_scheme(self):
-            return persistent._fom_log_screen_color_scheme
+            return persistent._fom_log_screen_config["color_scheme"]
 
         @color_scheme.setter
         def color_scheme(self, color_scheme):
-            persistent._fom_log_screen_color_scheme = color_scheme
+            persistent._fom_log_screen_config["color_scheme"] = color_scheme
 
         @property
         def show_on_startup(self):
-            return persistent._fom_log_screen_show_on_startup
+            return persistent._fom_log_screen_config["show_on_startup"]
 
         @show_on_startup.setter
         def show_on_startup(self, show):
-            persistent._fom_log_screen_show_on_startup = show
+            persistent._fom_log_screen_config["show_on_startup"] = show
 
 
         # Font sizes are defined here, each tuple has these four items:
@@ -120,11 +122,11 @@ init -1000 python in _fom_log_screen_config:
 
         @property
         def font_size(self):
-            return persistent._fom_log_screen_font_size
+            return persistent._fom_log_screen_config["font_size"]
 
         @font_size.setter
         def font_size(self, size):
-            persistent._fom_log_screen_font_size = size
+            persistent._fom_log_screen_config["font_size"] = size
 
         @property
         def font_ssize(self):
