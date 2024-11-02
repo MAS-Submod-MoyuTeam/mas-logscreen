@@ -72,12 +72,14 @@ init -900 python in _fom_log_screen_handler:
     class ColorStructPrinter(StructPrinter):
         def __init__(self, printer):
             super(ColorStructPrinter, self).__init__()
+            self._config = get_config()
             self.printer = printer
 
         def print_record(self, record):
             msg = self.printer.print_record(record)
             color = self.get_color(record)
-            return "{color=" + color + "}" + msg + "{/color}"
+            opacity = self._config.panel_text_opacity_hex
+            return "{color=" + color + opacity + "}" + msg + "{/color}"
 
         def get_color(self, record):
             return "#FFFFFF"

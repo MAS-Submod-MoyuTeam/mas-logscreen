@@ -2,6 +2,7 @@ default persistent._fom_log_screen_config = {
     "display_lines": 6,
     "logger_levels": {},
     "panel_opacity": 0x7f,
+    "text_opacity": 0xff,
     "color_scheme": 1,
     "show_on_startup": False,
     "font_size": 2
@@ -61,8 +62,11 @@ init -1000 python in _fom_log_screen_config:
 
         @property
         def panel_background_color(self):
-            as_hex = "{0:02X}".format(self.panel_opacity)
-            return "#000000" + as_hex
+            return "#000000" + self.panel_background_opacity_hex
+
+        @property
+        def panel_background_opacity_hex(self):
+            return "{0:02X}".format(self.panel_opacity)
 
         @property
         def panel_opacity(self):
@@ -73,6 +77,20 @@ init -1000 python in _fom_log_screen_config:
             opacity = max(0, opacity)
             opacity = min(255, opacity)
             persistent._fom_log_screen_config["panel_opacity"] = opacity
+
+        @property
+        def panel_text_opacity_hex(self):
+            return "{0:02X}".format(self.panel_text_opacity)
+
+        @property
+        def panel_text_opacity(self):
+            return persistent._fom_log_screen_config["text_opacity"]
+
+        @panel_text_opacity.setter
+        def panel_text_opacity(self, opacity):
+            opacity = max(0, opacity)
+            opacity = min(255, opacity)
+            persistent._fom_log_screen_config["text_opacity"] = opacity
 
         @property
         def color_scheme_names(self):
@@ -172,6 +190,7 @@ screen fom_log_screen_panel_settings_section():
             vbox:
                 use fom_log_screen_max_lines_control
                 use fom_log_screen_background_opacity_control
+                use fom_log_screen_text_opacity_control
                 use fom_log_screen_color_scheme_control
                 use fom_log_screen_font_size_control
 
@@ -245,6 +264,14 @@ screen fom_log_screen_font_size_control():
         value=FieldValue(config, "font_size", **config.font_size_options),
         display=config.font_size_names[config.font_size],
         tooltip=_("You can adjust log font size by dragging this slider."))
+
+screen fom_log_screen_text_opacity_control():
+    $ config = _fom_log_screen_config.get_config()
+    use fom_log_screen_control_slider(
+        title=_("Log text opacity"),
+        value=FieldValue(config, "panel_text_opacity", offset=0, range=254),
+        display=_("{0:.0f}%").format(float(config.panel_text_opacity) / 255 * 100),
+        tooltip=_("You can configure log text opacity level by dragging this slider."))
 
 
 screen fom_log_screen_control_slider(title, value, display=None, tooltip=None):
