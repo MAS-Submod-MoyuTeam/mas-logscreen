@@ -11,7 +11,7 @@
 	<a href="https://github.com/Friends-of-Monika/mas-logscreen/releases">
 		<img alt="Release downloads" src="https://img.shields.io/github/downloads/Friends-of-Monika/mas-logscreen/total">
 	</a>
-	<a href="https://github.com/Friends-of-Monika/mas-logscreen/blob/main/LICENSE.txt">
+	<a href="https://github.com/Friends-of-Monika/mas-logscreen/blob/master/LICENSE.txt">
 		<img alt="MIT license badge" src="https://img.shields.io/github/license/Friends-of-Monika/mas-logscreen">
 	</a>
 	<a href="https://mon.icu/discord">
