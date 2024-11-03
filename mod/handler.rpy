@@ -200,14 +200,10 @@ init -900 python in _fom_log_screen_handler:
             self._push_buffer_record(record)
             self.update_log_lines()
 
-        def _format(self, record):
-            return self._printer.print_record(record)
-
         def _push_buffer_record(self, record):
             if len(self._records_buffer) == self._buffer_lines:
                 self._records_buffer.pop(0)
 
-            msg = self._format(record)
             self._records_buffer.append(record)
             self._config.add_default_logger_level(record.name)
 
