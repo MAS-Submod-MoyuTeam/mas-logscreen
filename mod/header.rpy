@@ -10,7 +10,7 @@ init -990 python:
 init -989 python:
     if store.mas_submod_utils.isSubmodInstalled("Submod Updater Plugin"):
         store.sup_utils.SubmodUpdater(
-            submod="Submod Template",
+            submod="Log Screen",
             user_name="friends-of-monika",
             repository_name="mas-submod-template",
             extraction_depth=2
