@@ -1,12 +1,17 @@
-default persistent._fom_log_screen_config = {
-    "display_lines": 6,
-    "logger_levels": {},
-    "panel_opacity": 0x7f,
-    "text_opacity": 0xff,
-    "color_scheme": 1,
-    "show_on_startup": False,
-    "font_size": 2
-}
+default persistent._fom_log_screen_config = None
+
+init -1001 python:
+    # Shouldn't put complex mutable objects to 'default'...
+    if persistent._fom_log_screen_config is None:
+        persistent._fom_log_screen_config = {
+            "display_lines": 6,
+            "logger_levels": {},
+            "panel_opacity": 0x7f,
+            "text_opacity": 0xff,
+            "color_scheme": 1,
+            "show_on_startup": False,
+            "font_size": 2
+        }
 
 init -1000 python in _fom_log_screen_config:
     from store import persistent
