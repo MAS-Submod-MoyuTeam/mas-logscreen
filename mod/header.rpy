@@ -11,7 +11,7 @@ init -989 python:
     if store.mas_submod_utils.isSubmodInstalled("Submod Updater Plugin"):
         store.sup_utils.SubmodUpdater(
             submod="Log Screen",
-            user_name="friends-of-monika",
-            repository_name="mas-submod-template",
+            user_name="MAS-Submod-MoyuTeam",
+            repository_name="mas-logscreen",
             extraction_depth=2
         )

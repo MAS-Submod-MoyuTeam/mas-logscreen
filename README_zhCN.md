@@ -1,4 +1,3 @@
-```markdown
 <p align="center">
 	<!-- <img src="doc/Banner.png" width="360" height="200"> -->
 	<h1 align="center">📜 日志屏幕子模组 📜</h1>
@@ -53,4 +52,3 @@
 欢迎加入我们的 Discord 服务器进行交流！点击[这里](https://mon.icu/discord)加入。
 
 [![Discord server invitation](https://discordapp.com/api/guilds/1029849988953546802/widget.png?style=banner3)](https://mon.icu/discord)
-```
